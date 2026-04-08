@@ -20,8 +20,10 @@ import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.subscription.SubscriptionExtractor;
 import org.schabi.newpipe.extractor.suggestion.SuggestionExtractor;
 
+import org.schabi.newpipe.extractor.services.yandexmusic.extractors.YandexPlaylistExtractor;
 import org.schabi.newpipe.extractor.services.yandexmusic.extractors.YandexSearchExtractor;
 import org.schabi.newpipe.extractor.services.yandexmusic.extractors.YandexStreamExtractor;
+import org.schabi.newpipe.extractor.services.yandexmusic.linkHandler.YandexPlaylistLinkHandlerFactory;
 import org.schabi.newpipe.extractor.services.yandexmusic.linkHandler.YandexSearchQueryHandlerFactory;
 import org.schabi.newpipe.extractor.services.yandexmusic.linkHandler.YandexStreamLinkHandlerFactory;
 
@@ -55,7 +57,7 @@ public class YandexMusicService extends StreamingService {
 
     @Override
     public ListLinkHandlerFactory getPlaylistLHFactory() {
-        return null;
+        return YandexPlaylistLinkHandlerFactory.getInstance();
     }
 
     @Override
@@ -100,7 +102,7 @@ public class YandexMusicService extends StreamingService {
 
     @Override
     public PlaylistExtractor getPlaylistExtractor(final ListLinkHandler linkHandler) {
-        return null;
+        return new YandexPlaylistExtractor(this, linkHandler);
     }
 
     @Override

@@ -8,26 +8,31 @@ import org.schabi.newpipe.extractor.downloader.Downloader;
 import org.schabi.newpipe.extractor.downloader.Response;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
-import org.schabi.newpipe.extractor.services.yandexmusic.YandexMusicService;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class YandexApi {
     private static final String BASE_API_URL = "https://api.music.yandex.net";
-    private static final String SALT = "XGRlBW9FXlekgbPrRHuAleOkk";
-    
-    // We will inject the OAuth token from the Android app layer.
     public static String authorizationToken = "";
 
-    public static JsonObject getTrackDownloadInfo(String trackId) throws ExtractionException, IOException {
-        String url = BASE_API_URL + "/tracks/" + trackId + "/download-info";
-        
+    public static JsonObject getTrackInfo(String trackId) throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/tracks/" + trackId;
+        JsonObject result = fetchJson(url);
+        if (result != null && result.getArray("") != null) {
+             // Sometimes it returns an array as result, or object.
+             // Usually /tracks/{id} returns array of tracks in 'result'
+        }
+        // Let's adjust fetchJson to return the whole 'result' object/array
+        return result;
+    }
+
+    public static JsonObject getTrackInfoV2(String trackId) throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/tracks/" + trackId;
         Map<String, java.util.List<String>> headers = new HashMap<>();
         headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
         if (authorizationToken != null && !authorizationToken.isEmpty()) {
@@ -38,35 +43,24 @@ public class YandexApi {
         Response response = downloader.get(url, headers);
         
         try {
-            return JsonParser.object().from(response.responseBody());
+            JsonObject root = JsonParser.object().from(response.responseBody());
+            return root.getArray("result").getObject(0);
         } catch (JsonParserException e) {
-            throw new ParsingException("Could not parse Yandex download_info response", e);
+            throw new ParsingException("Could not parse Yandex track info response", e);
         }
     }
 
-    public static JsonObject getTrackInfo(String trackId) throws ExtractionException, IOException {
-        String url = BASE_API_URL + "/tracks/" + trackId;
-        
-        Map<String, java.util.List<String>> headers = new HashMap<>();
-        headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
-        if (authorizationToken != null && !authorizationToken.isEmpty()) {
-            headers.put("Authorization", java.util.Collections.singletonList("OAuth " + authorizationToken));
-        }
-
-        Downloader downloader = NewPipe.getDownloader();
-        Response response = downloader.get(url, headers);
-        
     public static JsonObject getAlbum(String albumId) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/albums/" + albumId + "/with-tracks";
-        return fetchJson(url);
+        return fetchJsonSimple(url);
     }
 
     public static JsonObject getPlaylist(String user, String playlistId) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/users/" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(user) + "/playlists/" + playlistId;
-        return fetchJson(url);
+        return fetchJsonSimple(url);
     }
 
-    private static JsonObject fetchJson(String url) throws ExtractionException, IOException {
+    private static JsonObject fetchJsonSimple(String url) throws ExtractionException, IOException {
         Map<String, java.util.List<String>> headers = new HashMap<>();
         headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
         if (authorizationToken != null && !authorizationToken.isEmpty()) {
@@ -86,22 +80,7 @@ public class YandexApi {
 
     public static JsonObject searchTracks(String query, int page) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/search?type=track&page=" + page + "&text=" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(query);
-        
-        Map<String, java.util.List<String>> headers = new HashMap<>();
-        headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
-        if (authorizationToken != null && !authorizationToken.isEmpty()) {
-            headers.put("Authorization", java.util.Collections.singletonList("OAuth " + authorizationToken));
-        }
-
-        Downloader downloader = NewPipe.getDownloader();
-        Response response = downloader.get(url, headers);
-        
-        try {
-            JsonObject root = JsonParser.object().from(response.responseBody());
-            return root.getObject("result");
-        } catch (JsonParserException e) {
-            throw new ParsingException("Could not parse Yandex search response", e);
-        }
+        return fetchJsonSimple(url);
     }
 
     public static String resolveStreamUrl(String downloadInfoUrl) throws ExtractionException, IOException {
@@ -112,44 +91,39 @@ public class YandexApi {
         Response response = downloader.get(downloadInfoUrl, headers);
         String xml = response.responseBody();
         
-        // Simple XML parsing since we only need a few fields
-        String host = extractXmlTag(xml, "host");
-        String path = extractXmlTag(xml, "path");
-        String ts = extractXmlTag(xml, "ts");
-        String s = extractXmlTag(xml, "s");
+        // Simple XML parsing for host, path, ts, s
+        String host = getXmlTag(xml, "host");
+        String path = getXmlTag(xml, "path");
+        String ts = getXmlTag(xml, "ts");
+        String s = getXmlTag(xml, "s");
         
-        if (host == null || path == null || ts == null || s == null) {
-            throw new ParsingException("Missing fields in Yandex download-info XML:\n" + xml);
-        }
-        
-        // sign = MD5(salt + path[1:] + s)
-        String contentToHash = SALT + path.substring(1) + s;
-        String sign = md5(contentToHash);
+        String sign = md5("XGRlNCpWAVERXX18" + path.substring(1) + s);
         
         return "https://" + host + "/get-mp3/" + sign + "/" + ts + path;
     }
 
-    private static String extractXmlTag(String xml, String tag) {
-        Pattern p = Pattern.compile("<" + tag + ">(.*?)</" + tag + ">");
-        Matcher m = p.matcher(xml);
-        if (m.find()) {
-            return m.group(1);
+    private static String getXmlTag(String xml, String tag) {
+        String start = "<" + tag + ">";
+        String end = "</" + tag + ">";
+        int s = xml.indexOf(start);
+        int e = xml.indexOf(end);
+        if (s != -1 && e != -1) {
+            return xml.substring(s + start.length(), e);
         }
-        return null;
+        return "";
     }
 
     private static String md5(String md5) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes("UTF-8"));
+            byte[] array = md.digest(md5.getBytes(StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
-            for (byte anArray : array) {
-                sb.append(Integer.toHexString((anArray & 0xFF) | 0x100).substring(1, 3));
+            for (byte b : array) {
+                sb.append(Integer.toHexString((b & 0xFF) | 0x100), 1, 3);
             }
             return sb.toString();
-        } catch (NoSuchAlgorithmException | java.io.UnsupportedEncodingException e) {
-            // Should not happen
+        } catch (NoSuchAlgorithmException e) {
+            return null;
         }
-        return null;
     }
 }
