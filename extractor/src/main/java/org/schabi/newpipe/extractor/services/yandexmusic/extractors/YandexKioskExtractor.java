@@ -47,22 +47,30 @@ public class YandexKioskExtractor extends KioskExtractor<InfoItem> {
             try {
                 JsonObject collection = YandexApi.getPlaylistLikedAndCreated();
                 myPlaylistsResult = new JsonArray();
-                if (collection != null) {
-                    JsonObject createdTab = collection.getObject("created_playlist_tab");
-                    if (createdTab != null) {
-                        JsonArray playlists = createdTab.getArray("playlists");
-                        if (playlists != null) {
-                            for (int i = 0; i < playlists.size(); i++) {
-                                myPlaylistsResult.add(playlists.getObject(i));
-                            }
-                        }
-                    }
-                    JsonObject likedTab = collection.getObject("liked_playlist_tab");
-                    if (likedTab != null) {
-                        JsonArray playlists = likedTab.getArray("playlists");
-                        if (playlists != null) {
-                            for (int i = 0; i < playlists.size(); i++) {
-                                myPlaylistsResult.add(playlists.getObject(i));
+                if (collection != null && collection.has("tabs")) {
+                    JsonArray tabs = collection.getArray("tabs");
+                    for (int i = 0; i < tabs.size(); i++) {
+                        JsonObject tab = tabs.getObject(i);
+                        JsonArray items = tab.getArray("items");
+                        if (items != null) {
+                            for (int j = 0; j < items.size(); j++) {
+                                JsonObject item = items.getObject(j);
+                                JsonObject data = item.getObject("data");
+                                if (data != null && data.has("playlist")) {
+                                    JsonObject playlist = data.getObject("playlist");
+                                    // Inject trackCount from data if missing in playlist
+                                    if (!playlist.has("trackCount") && data.has("trackCount")) {
+                                        playlist.put("trackCount", data.get("trackCount"));
+                                    }
+                                    // Handle missing owner login (use UID as fallback)
+                                    JsonObject owner = playlist.getObject("owner");
+                                    if (owner != null && (owner.getString("login") == null || owner.getString("login").isEmpty())) {
+                                        if (owner.has("uid")) {
+                                            owner.put("login", String.valueOf(owner.get("uid")));
+                                        }
+                                    }
+                                    myPlaylistsResult.add(playlist);
+                                }
                             }
                         }
                     }
@@ -71,7 +79,8 @@ public class YandexKioskExtractor extends KioskExtractor<InfoItem> {
                 e.printStackTrace();
                 throw new ExtractionException("Failed to fetch user collection.", e);
             }
-        } else if ("MyVibe".equals(kioskId)) {
+        }
+ else if ("MyVibe".equals(kioskId)) {
             vibeResult = YandexApi.getVibeTracks();
         }
     }

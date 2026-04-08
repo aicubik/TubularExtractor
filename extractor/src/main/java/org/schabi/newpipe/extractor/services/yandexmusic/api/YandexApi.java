@@ -78,7 +78,7 @@ public class YandexApi {
     }
 
     public static JsonObject getPlaylist(String user, String playlistId) throws ExtractionException, IOException {
-        String url = BASE_API_URL + "/users/" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(user) + "/playlists/" + playlistId;
+        String url = BASE_API_URL + "/users/" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(user) + "/playlists/" + playlistId + "?rich-tracks=true";
         return fetchJsonResult(url).getObject("result");
     }
 
@@ -102,9 +102,19 @@ public class YandexApi {
         }
 
         try {
-            return JsonParser.object().from(response.responseBody());
+            JsonObject root = JsonParser.object().from(response.responseBody());
+            if (root.has("error")) {
+                if (root.has("invocationInfo")) {
+                    JsonObject inv = root.getObject("invocationInfo");
+                    if (inv.has("req-id")) {
+                        throw new ExtractionException("YandexApi error: " + root.get("error") + " (req-id: " + inv.getString("req-id") + ") at " + url);
+                    }
+                }
+                throw new ExtractionException("YandexApi error: " + root.get("error") + " body: " + response.responseBody());
+            }
+            return root;
         } catch (JsonParserException e) {
-            throw new ParsingException("Could not parse Yandex response", e);
+            throw new ParsingException("Could not parse Yandex response: " + response.responseBody(), e);
         }
     }
 

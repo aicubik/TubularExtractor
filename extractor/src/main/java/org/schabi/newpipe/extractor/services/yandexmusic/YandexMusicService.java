@@ -96,9 +96,9 @@ public class YandexMusicService extends StreamingService {
                 new org.schabi.newpipe.extractor.services.yandexmusic.extractors.YandexKioskExtractor(this, h.fromUrl(url), id);
 
         try {
-            list.addKioskEntry(kioskFactory, h, "Trending");
-            list.addKioskEntry(kioskFactory, h, "Local");
             list.addKioskEntry(kioskFactory, h, "MyVibe");
+            list.addKioskEntry(kioskFactory, h, "Local");
+            list.addKioskEntry(kioskFactory, h, "Podcasts");
             list.setDefaultKiosk("MyVibe");
         } catch (final Exception e) {
             throw new ExtractionException(e);

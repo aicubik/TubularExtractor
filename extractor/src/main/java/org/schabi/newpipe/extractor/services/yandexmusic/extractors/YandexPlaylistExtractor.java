@@ -40,21 +40,16 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
         } else if (id.startsWith("playlists/")) {
             isAlbum = false;
             String playlistId = id.substring(10);
-            if (playlistId.startsWith("lk.")) {
-                // For liked tracks, try to get current user UID
-                try {
-                    JsonObject account = YandexApi.getAccountStatus();
-                    if (account != null && account.has("account")) {
-                        long uid = account.getObject("account").getLong("uid", 0);
-                        result = YandexApi.getPlaylist(String.valueOf(uid), "3");
-                    } else {
-                        result = YandexApi.getPlaylist("playlists", playlistId);
-                    }
-                } catch (Exception e) {
-                    result = YandexApi.getPlaylist("playlists", playlistId);
+            try {
+                JsonObject account = YandexApi.getAccountStatus();
+                if (account != null && account.has("account")) {
+                    long uid = account.getObject("account").getLong("uid", 0);
+                    result = YandexApi.getPlaylist(String.valueOf(uid), playlistId);
+                } else {
+                    result = YandexApi.getPlaylist("yamusic-daily", playlistId);
                 }
-            } else {
-                result = YandexApi.getPlaylist("playlists", playlistId);
+            } catch (Exception e) {
+                result = YandexApi.getPlaylist("yamusic-daily", playlistId);
             }
         } else {
             isAlbum = false;
@@ -170,9 +165,13 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
                 tracks = new JsonArray();
                 for (Object obj : playlistTracks) {
                     if (obj instanceof JsonObject) {
-                        JsonObject trackWrapper = (JsonObject) obj;
-                        if (trackWrapper.has("track")) {
-                            tracks.add(trackWrapper.get("track"));
+                        JsonObject trackItem = (JsonObject) obj;
+                        if (trackItem.has("track")) {
+                            // Wrapper format [{track: {}}, ...]
+                            tracks.add(trackItem.get("track"));
+                        } else {
+                            // Direct format [{}, {}, ...]
+                            tracks.add(trackItem);
                         }
                     }
                 }
