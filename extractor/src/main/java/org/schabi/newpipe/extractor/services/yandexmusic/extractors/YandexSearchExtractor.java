@@ -3,6 +3,7 @@ package org.schabi.newpipe.extractor.services.yandexmusic.extractors;
 import com.grack.nanojson.JsonArray;
 import com.grack.nanojson.JsonObject;
 import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.MetaInfo;
 import org.schabi.newpipe.extractor.Page;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.downloader.Downloader;
@@ -11,8 +12,12 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.SearchQueryHandler;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.services.yandexmusic.api.YandexApi;
+import org.schabi.newpipe.extractor.stream.StreamInfoItemsCollector;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
@@ -31,20 +36,25 @@ public class YandexSearchExtractor extends SearchExtractor {
     }
 
     @Override
-    public boolean isCorrection() {
+    public boolean isCorrectedSearch() {
         return false;
+    }
+
+    @Nonnull
+    @Override
+    public List<MetaInfo> getMetaInfo() {
+        return Collections.emptyList();
     }
 
     @Nonnull
     @Override
     public InfoItemsPage<InfoItem> getInitialPage() throws IOException, ExtractionException {
         String query = getSearchString();
-        // Just extract via our simple API wrapper
         searchResult = YandexApi.searchTracks(query, 0);
 
-        InfoItemsPage<InfoItem> page = new InfoItemsPage<>();
+        StreamInfoItemsCollector collector = new StreamInfoItemsCollector(getServiceId());
         if (searchResult == null) {
-            return page;
+            return new InfoItemsPage<>(Collections.emptyList(), null, Collections.emptyList());
         }
 
         JsonArray tracks = null;
@@ -58,21 +68,21 @@ public class YandexSearchExtractor extends SearchExtractor {
         if (tracks != null) {
             for (Object obj : tracks) {
                 if (obj instanceof JsonObject) {
-                    page.addItem(new YandexStreamInfoItemExtractor((JsonObject) obj));
+                    collector.commit(new YandexStreamInfoItemExtractor((JsonObject) obj));
                 }
             }
         }
 
-        // next page
+        Page nextPage = null;
         int count = searchResult.getInt("perPage", 20);
         int total = searchResult.getInt("total", 0);
         int pageNum = searchResult.getInt("page", 0);
         
         if ((pageNum + 1) * count < total) {
-            page.setNextPage(new Page(String.valueOf(pageNum + 1)));
+            nextPage = new Page(String.valueOf(pageNum + 1));
         }
 
-        return page;
+        return new InfoItemsPage<>(new ArrayList<>(collector.getItems()), nextPage, collector.getErrors());
     }
 
     @Override
@@ -85,10 +95,10 @@ public class YandexSearchExtractor extends SearchExtractor {
         int pageNum = Integer.parseInt(page.getId());
         
         JsonObject result = YandexApi.searchTracks(query, pageNum);
+        StreamInfoItemsCollector collector = new StreamInfoItemsCollector(getServiceId());
 
-        InfoItemsPage<InfoItem> resultPage = new InfoItemsPage<>();
         if (result == null) {
-            return resultPage;
+             return new InfoItemsPage<>(Collections.emptyList(), null, Collections.emptyList());
         }
 
         JsonArray tracks = null;
@@ -102,35 +112,30 @@ public class YandexSearchExtractor extends SearchExtractor {
         if (tracks != null) {
             for (Object obj : tracks) {
                 if (obj instanceof JsonObject) {
-                    resultPage.addItem(new YandexStreamInfoItemExtractor((JsonObject) obj));
+                    collector.commit(new YandexStreamInfoItemExtractor((JsonObject) obj));
                 }
             }
         }
 
+        Page nextPage = null;
         int count = result.getInt("perPage", 20);
         int total = result.getInt("total", 0);
         
         if ((pageNum + 1) * count < total) {
-            resultPage.setNextPage(new Page(String.valueOf(pageNum + 1)));
+            nextPage = new Page(String.valueOf(pageNum + 1));
         }
 
-        return resultPage;
+        return new InfoItemsPage<>(new ArrayList<>(collector.getItems()), nextPage, collector.getErrors());
     }
 
     @Override
     public void onFetchPage(@Nonnull Downloader downloader) throws IOException, ExtractionException {
-        // Nothing here, handled in getInitialPage
+        // Handled in getInitialPage
     }
 
     @Nonnull
     @Override
     public String getId() {
-        return getSearchString();
-    }
-
-    @Nonnull
-    @Override
-    public String getName() {
         return getSearchString();
     }
 }

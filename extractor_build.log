@@ -1,0 +1,113 @@
+> Task :extractor:protobufDummy UP-TO-DATE
+> Task :extractor:extractIncludeProto
+> Task :extractor:extractProto
+> Task :extractor:generateProto
+
+> Task :extractor:compileJava
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\api\YandexApi.java:25: error: cannot find symbol
+        JsonObject result = fetchJson(url);
+                            ^
+  symbol:   method fetchJson(String)
+  location: class YandexApi
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexPlaylistExtractor.java:75: error: constructor Image in class Image cannot be applied to given types;
+            return Collections.singletonList(new Image(coverUri));
+                                             ^
+  required: String,int,int,ResolutionLevel
+  found: String
+  reason: actual and formal argument lists differ in length
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:19: error: YandexSearchExtractor is not abstract and does not override abstract method getMetaInfo() in SearchExtractor
+public class YandexSearchExtractor extends SearchExtractor {
+       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:33: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:45: error: cannot infer type arguments for InfoItemsPage<>
+        InfoItemsPage<InfoItem> page = new InfoItemsPage<>();
+                                       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:61: error: cannot find symbol
+                    page.addItem(new YandexStreamInfoItemExtractor((JsonObject) obj));
+                        ^
+  symbol:   method addItem(YandexStreamInfoItemExtractor)
+  location: variable page of type InfoItemsPage<InfoItem>
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:72: error: cannot find symbol
+            page.setNextPage(new Page(String.valueOf(pageNum + 1)));
+                ^
+  symbol:   method setNextPage(Page)
+  location: variable page of type InfoItemsPage<InfoItem>
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:89: error: cannot infer type arguments for InfoItemsPage<>
+        InfoItemsPage<InfoItem> resultPage = new InfoItemsPage<>();
+                                             ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:105: error: cannot find symbol
+                    resultPage.addItem(new YandexStreamInfoItemExtractor((JsonObject) obj));
+                              ^
+  symbol:   method addItem(YandexStreamInfoItemExtractor)
+  location: variable resultPage of type InfoItemsPage<InfoItem>
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:114: error: cannot find symbol
+            resultPage.setNextPage(new Page(String.valueOf(pageNum + 1)));
+                      ^
+  symbol:   method setNextPage(Page)
+  location: variable resultPage of type InfoItemsPage<InfoItem>
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:82: error: constructor Image in class Image cannot be applied to given types;
+            return Collections.singletonList(new Image("https://" + coverUri));
+                                             ^
+  required: String,int,int,ResolutionLevel
+  found: String
+  reason: actual and formal argument lists differ in length
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:145: error: cannot find symbol
+        JsonObject downloadInfoResponse = YandexApi.getTrackDownloadInfo(getId());
+                                                   ^
+  symbol:   method getTrackDownloadInfo(String)
+  location: class YandexApi
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:89: error: constructor Image in class Image cannot be applied to given types;
+            return Collections.singletonList(new Image("https://" + coverUri));
+                                             ^
+  required: String,int,int,ResolutionLevel
+  found: String
+  reason: actual and formal argument lists differ in length
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\linkHandler\YandexPlaylistLinkHandlerFactory.java:9: error: YandexPlaylistLinkHandlerFactory is not abstract and does not override abstract method getUrl(String,List<String>,String) in ListLinkHandlerFactory
+public class YandexPlaylistLinkHandlerFactory extends ListLinkHandlerFactory {
+       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\linkHandler\YandexPlaylistLinkHandlerFactory.java:22: error: cannot find symbol
+            String user = Utils.matchGroup1("/users/(.*?)/playlists/", url);
+                               ^
+  symbol:   method matchGroup1(String,String)
+  location: class Utils
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\linkHandler\YandexPlaylistLinkHandlerFactory.java:23: error: cannot find symbol
+            String id = Utils.matchGroup1("/playlists/([0-9]+)", url);
+                             ^
+  symbol:   method matchGroup1(String,String)
+  location: class Utils
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\linkHandler\YandexPlaylistLinkHandlerFactory.java:26: error: cannot find symbol
+            return "album/" + Utils.matchGroup1("/album/([0-9]+)", url);
+                                   ^
+  symbol:   method matchGroup1(String,String)
+  location: class Utils
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\linkHandler\YandexSearchQueryHandlerFactory.java:6: error: YandexSearchQueryHandlerFactory is not abstract and does not override abstract method getUrl(String,List<String>,String) in SearchQueryHandlerFactory
+public class YandexSearchQueryHandlerFactory extends SearchQueryHandlerFactory {
+       ^
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+18 errors
+
+> Task :extractor:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/user/.gemini/antigravity/scratch/Youtube_Transcribtion/TubularExtractor/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':extractor:compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\api\YandexApi.java:25: error: cannot find symbol
+          JsonObject result = fetchJson(url);
+                              ^
+    symbol:   method fetchJson(String)
+    location: class YandexApi
+  18 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 2m 14s
+4 actionable tasks: 4 executed

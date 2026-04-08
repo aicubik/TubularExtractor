@@ -87,7 +87,24 @@ public class YandexMusicService extends StreamingService {
 
     @Override
     public KioskList getKioskList() throws ExtractionException {
-        return new KioskList(this);
+        final KioskList list = new KioskList(this);
+
+        final org.schabi.newpipe.extractor.services.yandexmusic.linkHandler.YandexKioskLinkHandlerFactory h = 
+               org.schabi.newpipe.extractor.services.yandexmusic.linkHandler.YandexKioskLinkHandlerFactory.getInstance();
+               
+        final KioskList.KioskExtractorFactory kioskFactory = (streamingService, url, id) ->
+                new org.schabi.newpipe.extractor.services.yandexmusic.extractors.YandexKioskExtractor(this, h.fromUrl(url), id);
+
+        try {
+            list.addKioskEntry(kioskFactory, h, "Trending");
+            list.addKioskEntry(kioskFactory, h, "Local");
+            list.addKioskEntry(kioskFactory, h, "MyVibe");
+            list.setDefaultKiosk("MyVibe");
+        } catch (final Exception e) {
+            throw new ExtractionException(e);
+        }
+
+        return list;
     }
 
     @Override

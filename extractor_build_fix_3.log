@@ -1,0 +1,324 @@
+> Task :extractor:protobufDummy UP-TO-DATE
+> Task :extractor:extractIncludeProto UP-TO-DATE
+> Task :extractor:extractProto UP-TO-DATE
+> Task :extractor:generateProto UP-TO-DATE
+
+> Task :extractor:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :extractor:processResources
+> Task :extractor:classes
+> Task :extractor:jar
+
+> Task :extractor:javadoc
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:199: warning: no @param for url
+    public FeedExtractor getFeedExtractor(final String url) throws ExtractionException {
+                         ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:199: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public FeedExtractor getFeedExtractor(final String url) throws ExtractionException {
+                         ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:207: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract KioskList getKioskList() throws ExtractionException;
+                              ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:214: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract ChannelExtractor getChannelExtractor(ListLinkHandler linkHandler)
+                                     ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:223: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract ChannelTabExtractor getChannelTabExtractor(ListLinkHandler linkHandler)
+                                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:231: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract PlaylistExtractor getPlaylistExtractor(ListLinkHandler linkHandler)
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:239: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract StreamExtractor getStreamExtractor(LinkHandler linkHandler)
+                                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:323: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public final LinkType getLinkTypeByUrl(final String url) throws ParsingException {
+                          ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:348: warning: no @return
+    public List<Localization> getSupportedLocalizations() {
+                              ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:355: warning: no @return
+    public List<ContentCountry> getSupportedCountries() {
+                                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:369: warning: no @return
+    public Localization getLocalization() {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:396: warning: no @return
+    public ContentCountry getContentCountry() {
+                          ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:415: warning: no @param for localization
+    public TimeAgoParser getTimeAgoParser(final Localization localization) {
+                         ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\StreamingService.java:415: warning: no @return
+    public TimeAgoParser getTimeAgoParser(final Localization localization) {
+                         ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\InfoItemsCollector.java:53: warning: no @param for comparator
+    public InfoItemsCollector(final int serviceId, @Nullable final Comparator<I> comparator) {
+           ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\ListExtractor.java:47: warning: no @throws for java.io.IOException
+    public abstract InfoItemsPage<R> getInitialPage() throws IOException, ExtractionException;
+                                     ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\ListExtractor.java:47: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract InfoItemsPage<R> getInitialPage() throws IOException, ExtractionException;
+                                     ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\ListExtractor.java:56: warning: no @throws for java.io.IOException
+    public abstract InfoItemsPage<R> getPage(Page page) throws IOException, ExtractionException;
+                                     ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\ListExtractor.java:56: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract InfoItemsPage<R> getPage(Page page) throws IOException, ExtractionException;
+                                     ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsExtractor.java:21: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public boolean isCommentsDisabled() throws ExtractionException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsExtractor.java:28: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public int getCommentsCount() throws ExtractionException {
+               ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:32: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default int getLikeCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:41: warning: no @return
+    default String getTextualLikeCount() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:41: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default String getTextualLikeCount() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:49: warning: no @return
+    default Description getCommentText() throws ParsingException {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:49: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default Description getCommentText() throws ParsingException {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:58: warning: no @return
+    default String getTextualUploadDate() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:58: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default String getTextualUploadDate() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:68: warning: no @return
+    default DateWrapper getUploadDate() throws ParsingException {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:68: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default DateWrapper getUploadDate() throws ParsingException {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:92: warning: no @return
+    default boolean isHeartedByUploader() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:92: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default boolean isHeartedByUploader() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:99: warning: no @return
+    default boolean isPinned() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:99: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default boolean isPinned() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:106: warning: no @return
+    default boolean isUploaderVerified() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:106: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default boolean isUploaderVerified() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:115: warning: no @return
+    default int getStreamPosition() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:115: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default int getStreamPosition() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:125: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default int getReplyCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:135: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default Page getReplies() throws ParsingException {
+                 ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:142: warning: no @return
+    default boolean isChannelOwner() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:142: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default boolean isChannelOwner() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:149: warning: no @return
+    default boolean hasCreatorReply() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\comments\CommentsInfoItemExtractor.java:149: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    default boolean hasCreatorReply() throws ParsingException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:97: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public abstract List<Image> getThumbnails() throws ParsingException;
+                                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:106: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public Description getDescription() throws ParsingException {
+                       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:125: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getLength() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:136: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getTimeStamp() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:146: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getViewCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:156: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getLikeCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:166: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getDislikeCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:179: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public abstract String getUploaderUrl() throws ParsingException;
+                           ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:188: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public abstract String getUploaderName() throws ParsingException;
+                           ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:196: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public boolean isUploaderVerified() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:207: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public long getUploaderSubscriberCount() throws ParsingException {
+                ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:222: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public List<Image> getUploaderAvatars() throws ParsingException {
+                       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:235: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getSubChannelUrl() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:246: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getSubChannelName() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:266: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public List<Image> getSubChannelAvatars() throws ParsingException {
+                       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:291: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getHlsUrl() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:303: warning: no @throws for java.io.IOException
+    public abstract List<AudioStream> getAudioStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:303: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract List<AudioStream> getAudioStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:314: warning: no @throws for java.io.IOException
+    public abstract List<VideoStream> getVideoStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:314: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract List<VideoStream> getVideoStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:325: warning: no @throws for java.io.IOException
+    public abstract List<VideoStream> getVideoOnlyStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:325: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public abstract List<VideoStream> getVideoOnlyStreams() throws IOException, ExtractionException;
+                                      ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:334: warning: no @throws for java.io.IOException
+    public List<SubtitlesStream> getSubtitlesDefault() throws IOException, ExtractionException {
+                                 ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:334: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public List<SubtitlesStream> getSubtitlesDefault() throws IOException, ExtractionException {
+                                 ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:346: warning: no @throws for java.io.IOException
+    public List<SubtitlesStream> getSubtitles(final MediaFormat format)
+                                 ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:346: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public List<SubtitlesStream> getSubtitles(final MediaFormat format)
+                                 ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:356: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public abstract StreamType getStreamType() throws ParsingException;
+                               ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:369: warning: no @throws for java.io.IOException
+    getRelatedItems() throws IOException, ExtractionException {
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:369: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    getRelatedItems() throws IOException, ExtractionException {
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:380: warning: no @throws for java.io.IOException
+    public StreamInfoItemsCollector getRelatedStreams() throws IOException, ExtractionException {
+                                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:380: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public StreamInfoItemsCollector getRelatedStreams() throws IOException, ExtractionException {
+                                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:396: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ExtractionException
+    public List<Frameset> getFrames() throws ExtractionException {
+                          ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:419: warning: no @param for regexPattern
+    protected long getTimestampSeconds(final String regexPattern) throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:419: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    protected long getTimestampSeconds(final String regexPattern) throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:470: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getHost() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:479: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public Privacy getPrivacy() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:490: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getCategory() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:501: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getLicence() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:514: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public Locale getLanguageInfo() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:525: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public List<String> getTags() throws ParsingException {
+                        ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:539: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public String getSupportInfo() throws ParsingException {
+                  ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:550: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public List<StreamSegment> getStreamSegments() throws ParsingException {
+                               ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:567: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public List<MetaInfo> getMetaInfo() throws ParsingException {
+                          ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\stream\StreamExtractor.java:581: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ParsingException
+    public boolean isShortFormContent() throws ParsingException {
+                   ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:31: warning: no @throws for java.io.IOException
+    public Response get(final String url) throws IOException, ReCaptchaException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:31: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response get(final String url) throws IOException, ReCaptchaException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:44: warning: no @throws for java.io.IOException
+    public Response get(final String url, final Localization localization)
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:44: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response get(final String url, final Localization localization)
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:57: warning: no @throws for java.io.IOException
+    public Response get(final String url, @Nullable final Map<String, List<String>> headers)
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:57: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response get(final String url, @Nullable final Map<String, List<String>> headers)
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:73: warning: no @throws for java.io.IOException
+    public Response get(final String url,
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:73: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response get(final String url,
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:90: warning: no @throws for java.io.IOException
+    public Response head(final String url) throws IOException, ReCaptchaException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:90: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response head(final String url) throws IOException, ReCaptchaException {
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:102: warning: no @throws for java.io.IOException
+    public Response head(final String url, @Nullable final Map<String, List<String>> headers)
+                    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\downloader\Downloader.java:102: warning: no @throws for org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+    public Response head(final String url, @Nullable final Map<String, List<String>> headers)
+                    ^
+100 warnings
+
+> Task :extractor:javadocJar
+> Task :extractor:sourcesJar
+> Task :extractor:assemble
+
+[Incubating] Problems report is available at: file:///C:/Users/user/.gemini/antigravity/scratch/Youtube_Transcribtion/TubularExtractor/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 16s
+9 actionable tasks: 6 executed, 3 up-to-date

@@ -37,6 +37,25 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
         if (id.startsWith("album/")) {
             isAlbum = true;
             result = YandexApi.getAlbum(id.substring(6));
+        } else if (id.startsWith("playlists/")) {
+            isAlbum = false;
+            String playlistId = id.substring(10);
+            if (playlistId.startsWith("lk.")) {
+                // For liked tracks, try to get current user UID
+                try {
+                    JsonObject account = YandexApi.getAccountStatus();
+                    if (account != null && account.has("account")) {
+                        long uid = account.getObject("account").getLong("uid", 0);
+                        result = YandexApi.getPlaylist(String.valueOf(uid), "3");
+                    } else {
+                        result = YandexApi.getPlaylist("playlists", playlistId);
+                    }
+                } catch (Exception e) {
+                    result = YandexApi.getPlaylist("playlists", playlistId);
+                }
+            } else {
+                result = YandexApi.getPlaylist("playlists", playlistId);
+            }
         } else {
             isAlbum = false;
             String[] parts = id.split("/playlists/");
@@ -72,7 +91,7 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
             if (!coverUri.startsWith("http")) {
                 coverUri = "https://" + coverUri;
             }
-            return Collections.singletonList(new Image(coverUri));
+            return Collections.singletonList(new Image(coverUri, Image.HEIGHT_UNKNOWN, Image.WIDTH_UNKNOWN, Image.ResolutionLevel.UNKNOWN));
         }
         return Collections.emptyList();
     }
@@ -82,7 +101,7 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
         if (isAlbum) {
             JsonArray artists = result.getArray("artists");
             if (artists != null && !artists.isEmpty()) {
-                return "https://music.yandex.ru/artist/" + artists.getObject(0).getLong("id");
+                return "https://music.yandex.ru/artist/" + YandexApi.getStringId(artists.getObject(0), "id");
             }
         } else {
             JsonObject owner = result.getObject("owner");
@@ -98,12 +117,14 @@ public class YandexPlaylistExtractor extends PlaylistExtractor {
          if (isAlbum) {
             JsonArray artists = result.getArray("artists");
             if (artists != null && !artists.isEmpty()) {
-                return artists.getObject(0).getString("name");
+                JsonObject artist = artists.getObject(0);
+                return artist != null ? artist.getString("name") : "Unknown";
             }
         } else {
             JsonObject owner = result.getObject("owner");
             if (owner != null) {
-                return owner.getString("name");
+                String name = owner.getString("name");
+                return name != null ? name : owner.getString("login");
             }
         }
         return "Unknown";

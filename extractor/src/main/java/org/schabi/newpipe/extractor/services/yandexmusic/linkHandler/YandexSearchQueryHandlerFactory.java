@@ -3,19 +3,28 @@ package org.schabi.newpipe.extractor.services.yandexmusic.linkHandler;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.SearchQueryHandlerFactory;
 
-public class YandexSearchQueryHandlerFactory extends SearchQueryHandlerFactory {
-    public static final String TRACKS = "tracks";
-    
-    private static final YandexSearchQueryHandlerFactory INSTANCE = new YandexSearchQueryHandlerFactory();
+import java.util.List;
 
-    private YandexSearchQueryHandlerFactory() {}
+public class YandexSearchQueryHandlerFactory extends SearchQueryHandlerFactory {
+
+    private static final YandexSearchQueryHandlerFactory INSTANCE = new YandexSearchQueryHandlerFactory();
 
     public static YandexSearchQueryHandlerFactory getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public String getUrl(String searchString) throws ParsingException {
-        return "https://music.yandex.ru/search?text=" + searchString;
+    public String getUrl(String id, List<String> contentFilter, String sortFilter) {
+        return "https://music.yandex.ru/search?text=" + id;
+    }
+
+    @Override
+    public String getId(String url) throws ParsingException {
+        return org.schabi.newpipe.extractor.utils.Utils.decodeUrlUtf8(org.schabi.newpipe.extractor.utils.Parser.matchGroup1("text=([^&]+)", url));
+    }
+
+    @Override
+    public boolean onAcceptUrl(String url) {
+        return url.contains("music.yandex.ru/search");
     }
 }

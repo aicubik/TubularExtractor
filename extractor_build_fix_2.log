@@ -1,0 +1,33 @@
+> Task :extractor:protobufDummy UP-TO-DATE
+> Task :extractor:extractIncludeProto UP-TO-DATE
+> Task :extractor:extractProto UP-TO-DATE
+> Task :extractor:generateProto UP-TO-DATE
+
+> Task :extractor:compileJava
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:17: error: YandexStreamInfoItemExtractor is not abstract and does not override abstract method isUploaderVerified() in StreamInfoItemExtractor
+public class YandexStreamInfoItemExtractor implements StreamInfoItemExtractor {
+       ^
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 error
+
+> Task :extractor:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/user/.gemini/antigravity/scratch/Youtube_Transcribtion/TubularExtractor/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':extractor:compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:17: error: YandexStreamInfoItemExtractor is not abstract and does not override abstract method isUploaderVerified() in StreamInfoItemExtractor
+  public class YandexStreamInfoItemExtractor implements StreamInfoItemExtractor {
+         ^
+  1 error
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 5s
+4 actionable tasks: 1 executed, 3 up-to-date

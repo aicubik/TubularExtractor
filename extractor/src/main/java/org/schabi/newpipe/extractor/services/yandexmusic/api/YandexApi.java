@@ -1,5 +1,6 @@
 package org.schabi.newpipe.extractor.services.yandexmusic.api;
 
+import com.grack.nanojson.JsonArray;
 import com.grack.nanojson.JsonObject;
 import com.grack.nanojson.JsonParser;
 import com.grack.nanojson.JsonParserException;
@@ -20,18 +21,34 @@ public class YandexApi {
     private static final String BASE_API_URL = "https://api.music.yandex.net";
     public static String authorizationToken = "";
 
-    public static JsonObject getTrackInfo(String trackId) throws ExtractionException, IOException {
-        String url = BASE_API_URL + "/tracks/" + trackId;
-        JsonObject result = fetchJson(url);
-        if (result != null && result.getArray("") != null) {
-             // Sometimes it returns an array as result, or object.
-             // Usually /tracks/{id} returns array of tracks in 'result'
+    public static String getStringId(final JsonObject json, final String key) {
+        if (json == null) {
+            return "0";
         }
-        // Let's adjust fetchJson to return the whole 'result' object/array
-        return result;
+        
+        // Try the requested key first
+        if (json.containsKey(key)) {
+            final Object val = json.get(key);
+            if (val != null) {
+                return String.valueOf(val).replace("\"", "");
+            }
+        }
+        
+        // Fallback keys common in Yandex Music API
+        final String[] fallbackKeys = {"trackId", "id", "realId"};
+        for (final String fallbackKey : fallbackKeys) {
+            if (json.containsKey(fallbackKey)) {
+                final Object val = json.get(fallbackKey);
+                if (val != null) {
+                    return String.valueOf(val).replace("\"", "");
+                }
+            }
+        }
+        
+        return "0";
     }
 
-    public static JsonObject getTrackInfoV2(String trackId) throws ExtractionException, IOException {
+    public static JsonObject getTrackInfo(String trackId) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/tracks/" + trackId;
         Map<String, java.util.List<String>> headers = new HashMap<>();
         headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
@@ -50,17 +67,64 @@ public class YandexApi {
         }
     }
 
+    public static JsonObject getTrackDownloadInfo(String trackId) throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/tracks/" + trackId + "/download-info";
+        return fetchJsonResult(url);
+    }
+
     public static JsonObject getAlbum(String albumId) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/albums/" + albumId + "/with-tracks";
-        return fetchJsonSimple(url);
+        return fetchJsonResult(url).getObject("result");
     }
 
     public static JsonObject getPlaylist(String user, String playlistId) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/users/" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(user) + "/playlists/" + playlistId;
-        return fetchJsonSimple(url);
+        return fetchJsonResult(url).getObject("result");
     }
 
-    private static JsonObject fetchJsonSimple(String url) throws ExtractionException, IOException {
+    private static JsonObject fetchJsonResult(String url) throws ExtractionException, IOException {
+        return fetchJsonResult(url, "GET", null);
+    }
+
+    private static JsonObject fetchJsonResult(String url, String method, byte[] body) throws ExtractionException, IOException {
+        Map<String, java.util.List<String>> headers = new HashMap<>();
+        headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
+        if (authorizationToken != null && !authorizationToken.isEmpty()) {
+            headers.put("Authorization", java.util.Collections.singletonList("OAuth " + authorizationToken));
+        }
+
+        Downloader downloader = NewPipe.getDownloader();
+        Response response;
+        if ("POST".equalsIgnoreCase(method)) {
+            response = downloader.post(url, headers, body != null ? body : new byte[0]);
+        } else {
+            response = downloader.get(url, headers);
+        }
+
+        try {
+            return JsonParser.object().from(response.responseBody());
+        } catch (JsonParserException e) {
+            throw new ParsingException("Could not parse Yandex response", e);
+        }
+    }
+
+    public static JsonObject getChart() throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/landing3/chart";
+        return fetchJsonResult(url).getObject("result");
+    }
+    
+    public static JsonObject getAccountStatus() throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/account/status";
+        return fetchJsonResult(url).getObject("result");
+    }
+
+    public static JsonObject getPlaylistLikedAndCreated() throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/landing-blocks/collection/playlists-liked-and-playlists-created?count=100";
+        return fetchJsonResult(url).getObject("result");
+    }
+
+    public static com.grack.nanojson.JsonArray getUserPlaylists(String uid) throws ExtractionException, IOException {
+        String url = BASE_API_URL + "/users/" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(uid) + "/playlists/list";
         Map<String, java.util.List<String>> headers = new HashMap<>();
         headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
         if (authorizationToken != null && !authorizationToken.isEmpty()) {
@@ -72,7 +136,7 @@ public class YandexApi {
 
         try {
             JsonObject root = JsonParser.object().from(response.responseBody());
-            return root.getObject("result");
+            return root.getArray("result");
         } catch (JsonParserException e) {
             throw new ParsingException("Could not parse Yandex response", e);
         }
@@ -80,18 +144,79 @@ public class YandexApi {
 
     public static JsonObject searchTracks(String query, int page) throws ExtractionException, IOException {
         String url = BASE_API_URL + "/search?type=track&page=" + page + "&text=" + org.schabi.newpipe.extractor.utils.Utils.encodeUrlUtf8(query);
-        return fetchJsonSimple(url);
+        return fetchJsonResult(url);
+    }
+
+    public static JsonArray getVibeTracks() throws ExtractionException, IOException {
+        // Use Rotor API for "My Vibe"
+        try {
+            // 1. Create session if needed or just request tracks
+            String url = BASE_API_URL + "/rotor/station/user:onyourwave/tracks";
+            JsonObject response = fetchJsonResult(url);
+            JsonObject result = response.getObject("result");
+            if (result != null && result.has("sequence")) {
+                JsonArray sequence = result.getArray("sequence");
+                JsonArray tracks = new JsonArray();
+                for (int i = 0; i < sequence.size(); i++) {
+                    JsonObject item = sequence.getObject(i);
+                    if (item != null && item.has("track")) {
+                        tracks.add(item.getObject("track"));
+                    }
+                }
+                if (!tracks.isEmpty()) return tracks;
+            }
+        } catch (Exception e) {
+            // fallback to old radio API if rotor fails
+        }
+
+        // Fallback to legacy Radio API
+        final String url = BASE_API_URL + "/radio/personal-vibe/tracks";
+        final JsonObject root = fetchJsonResult(url, "POST", new byte[0]);
+        final JsonObject result = root.getObject("result");
+        if (result != null && result.has("sequence")) {
+            final JsonArray sequence = result.getArray("sequence");
+            final JsonArray tracks = new JsonArray();
+            for (int i = 0; i < sequence.size(); i++) {
+                final JsonObject item = sequence.getObject(i);
+                if (item != null && item.has("track")) {
+                    tracks.add(item.getObject("track"));
+                }
+            }
+            return tracks;
+        }
+        
+        return new JsonArray();
+    }
+
+    private static com.grack.nanojson.JsonArray fetchJsonArrayResult(String url) throws ExtractionException, IOException {
+        Map<String, java.util.List<String>> headers = new HashMap<>();
+        headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
+        if (authorizationToken != null && !authorizationToken.isEmpty()) {
+            headers.put("Authorization", java.util.Collections.singletonList("OAuth " + authorizationToken));
+        }
+
+        Downloader downloader = NewPipe.getDownloader();
+        Response response = downloader.get(url, headers);
+
+        try {
+            JsonObject root = JsonParser.object().from(response.responseBody());
+            return root.getArray("result");
+        } catch (JsonParserException e) {
+            throw new ParsingException("Could not parse Yandex response", e);
+        }
     }
 
     public static String resolveStreamUrl(String downloadInfoUrl) throws ExtractionException, IOException {
         Downloader downloader = NewPipe.getDownloader();
         Map<String, java.util.List<String>> headers = new HashMap<>();
         headers.put("User-Agent", java.util.Collections.singletonList("YandexMusicAndroid/24.12"));
+        if (authorizationToken != null && !authorizationToken.isEmpty()) {
+            headers.put("Authorization", java.util.Collections.singletonList("OAuth " + authorizationToken));
+        }
         
         Response response = downloader.get(downloadInfoUrl, headers);
         String xml = response.responseBody();
         
-        // Simple XML parsing for host, path, ts, s
         String host = getXmlTag(xml, "host");
         String path = getXmlTag(xml, "path");
         String ts = getXmlTag(xml, "ts");

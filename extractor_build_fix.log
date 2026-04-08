@@ -1,0 +1,110 @@
+> Task :extractor:protobufDummy UP-TO-DATE
+> Task :extractor:extractIncludeProto UP-TO-DATE
+> Task :extractor:extractProto UP-TO-DATE
+> Task :extractor:generateProto UP-TO-DATE
+
+> Task :extractor:compileJava FAILED
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:10: error: cannot find symbol
+import org.schabi.newpipe.extractor.linkhandler.StreamLinkHandler;
+                                               ^
+  symbol:   class StreamLinkHandler
+  location: package org.schabi.newpipe.extractor.linkhandler
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:24: error: cannot find symbol
+    public YandexStreamExtractor(StreamingService service, StreamLinkHandler linkHandler) {
+                                                           ^
+  symbol:   class StreamLinkHandler
+  location: class YandexStreamExtractor
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:108: error: cannot find symbol
+    public StreamAudioFormat getAudioFormat() {
+           ^
+  symbol:   class StreamAudioFormat
+  location: class YandexStreamExtractor
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:139: error: cannot find symbol
+    public SubtitlesExtractor getSubtitlesExtractor() {
+           ^
+  symbol:   class SubtitlesExtractor
+  location: class YandexStreamExtractor
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:56: error: incompatible types: cannot infer type arguments for InfoItemsPage<>
+            return new InfoItemsPage<>(collector, null);
+                                    ^
+    reason: inference variable T has incompatible equality constraints InfoItem,StreamInfoItem
+  where T is a type-variable:
+    T extends InfoItem declared in class InfoItemsPage
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:84: error: incompatible types: cannot infer type arguments for InfoItemsPage<>
+        return new InfoItemsPage<>(collector, nextPage);
+                                ^
+    reason: inference variable T has incompatible equality constraints InfoItem,StreamInfoItem
+  where T is a type-variable:
+    T extends InfoItem declared in class InfoItemsPage
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:100: error: incompatible types: cannot infer type arguments for InfoItemsPage<>
+            return new InfoItemsPage<>(collector, null);
+                                    ^
+    reason: inference variable T has incompatible equality constraints InfoItem,StreamInfoItem
+  where T is a type-variable:
+    T extends InfoItem declared in class InfoItemsPage
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexSearchExtractor.java:127: error: incompatible types: cannot infer type arguments for InfoItemsPage<>
+        return new InfoItemsPage<>(collector, nextPage);
+                                ^
+    reason: inference variable T has incompatible equality constraints InfoItem,StreamInfoItem
+  where T is a type-variable:
+    T extends InfoItem declared in class InfoItemsPage
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:97: error: getUploadDate() in YandexStreamExtractor cannot override getUploadDate() in StreamExtractor
+    public long getUploadDate() {
+                ^
+  return type long is not compatible with DateWrapper
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:96: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:107: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:109: error: cannot find symbol
+        return StreamAudioFormat.MP3;
+               ^
+  symbol:   variable StreamAudioFormat
+  location: class YandexStreamExtractor
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:118: error: cannot find symbol
+            return Collections.singletonList(new AudioStream(streamUrl, StreamAudioFormat.MP3, 192));
+                                                                        ^
+  symbol:   variable StreamAudioFormat
+  location: class YandexStreamExtractor
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:123: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:138: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:15: error: YandexStreamInfoItemExtractor is not abstract and does not override abstract method getUploadDate() in StreamInfoItemExtractor
+public class YandexStreamInfoItemExtractor implements StreamInfoItemExtractor {
+       ^
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:62: error: getUploadDate() in YandexStreamInfoItemExtractor cannot implement getUploadDate() in StreamInfoItemExtractor
+    public long getUploadDate() throws ParsingException {
+                ^
+  return type long is not compatible with DateWrapper
+C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamInfoItemExtractor.java:61: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+18 errors
+
+[Incubating] Problems report is available at: file:///C:/Users/user/.gemini/antigravity/scratch/Youtube_Transcribtion/TubularExtractor/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':extractor:compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\user\.gemini\antigravity\scratch\Youtube_Transcribtion\TubularExtractor\extractor\src\main\java\org\schabi\newpipe\extractor\services\yandexmusic\extractors\YandexStreamExtractor.java:10: error: cannot find symbol
+  import org.schabi.newpipe.extractor.linkhandler.StreamLinkHandler;
+                                                 ^
+    symbol:   class StreamLinkHandler
+    location: package org.schabi.newpipe.extractor.linkhandler
+  18 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 2s
+4 actionable tasks: 1 executed, 3 up-to-date
